@@ -1,0 +1,11 @@
+@import 'node_modules/coffeekraken-sugar/index';
+
+@import "todomvc";
+
+@include s-setup(());
+@include s-init();
+@include s-classes();
+
+body {
+	padding: s-space(bigger);
+}
