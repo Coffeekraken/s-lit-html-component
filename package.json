@@ -1,12 +1,12 @@
 {
-  "name": "coffeekraken-s-component-name-component",
+  "name": "coffeekraken-s-lit-html-component",
   "version": "1.0.0",
-  "description": "component-description",
+  "description": "Base class that allows the creation of [lit-html](https://lit-html.polymer-project.org/) based webcomponent",
   "main": "dist/index.js",
   "homepage": "https://coffeekraken.io",
   "repository": {
     "type": "git",
-    "url": "https://github.com/coffeekraken/s-{component-name}-component"
+    "url": "https://github.com/coffeekraken/s-lit-html-component"
   },
   "watch": {
     "doc:js": {
@@ -79,7 +79,7 @@
   },
   "dependencies": {
     "@babel/plugin-transform-react-jsx": "^7.3.0",
-    "coffeekraken-sugar": "^1.0.58",
+    "coffeekraken-sugar": "^1.1.5",
     "fastdom": "^1.0.9",
     "lit-html": "^1.0.0",
     "on-change": "^1.2.0"
@@ -110,6 +110,8 @@
     "classnames": "^2.2.6",
     "coffeekraken-code-playground": "^1.0.19",
     "coffeekraken-docblock-to-markdown": "^1.0.0",
+    "coffeekraken-s-form-component": "^1.0.3",
+    "coffeekraken-s-select-component": "^1.0.6",
     "coffeekraken-s-typography-component": "^1.0.2",
     "coffeekraken-scripts-stack": "^1.0.3",
     "eslint": "^5.7.0",

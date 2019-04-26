@@ -1,5 +1,34 @@
 @charset "UTF-8";
 /**
+ * Get an icon in base64 url encoded format
+ * Available icons:
+ * - search
+ * - arrow-down
+ * - arrow-left
+ * - arrow-up
+ * - arrow-right
+ * - angle-down
+ * - angle-up
+ * - angle-left
+ * - angle-right
+ * - check
+ * - cross
+ * - menu
+ * - gear
+ * - list
+ * - refresh
+ * - trash
+ * - share
+ * - edit
+ * - save
+ * - grid
+ * - filter
+ *
+ * @param    {String}    $icon    The icon name wanted
+ * @param    {String}    [$color="default"]    The color wanted
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
  * Parse and return the Map respresentation of a border property
  * The $border argument will be parsed with the [s-parse-properties](../core/functions/_s-parse-properties.scss) function.
  *
@@ -426,7 +455,6 @@
  * The content need to be displayed as absolute top left and fit in size.
  *
  * @param 		{Number} 		$ratio 			The ratio to keep like 16/9, etc...
- * @param 		{String} 		[$type=before] 	The type of ratio to apply. Can be before or after
  *
  * @example 	scss
  * .my-cool-element {
@@ -434,6 +462,13 @@
  * }
  *
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * Register a new icon to be used as base64 encoded url.
+ * If you want your icon to be colorable, you need to specify this code on your paths: `style="fill:%color"`
+ * @param    {String}    $name    The icon name
+ * @param    {String}    $svgCode    The icons svg code
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 /**
  * Print out a reset css
@@ -540,6 +575,8 @@
  * - invert {Boolean}
  * - opacity {Percent}
  * - mix {Color}
+ * - lightness {Percent}
+ * - saturation {Percent}
  *
  * @param 		{String|Color} 		$color 				The color name or the color value to manipulate
  * @param 		{String|List} 			[$modifier=null] 	The color modifier to apply. Can be a registered modifier name or a modifier list
@@ -1443,6 +1480,7 @@
  * @param 			{List} 			[$extensions=woff2] 	The extensions list that you have available
  * @param 			{String} 		[$font-weight=normal] 	The font-weight property
  * @param 			{String} 		[$font-style=normal] 	The font-style property
+ * @param       {String}    [$font-display=auto]    The font-display property
  *
  * @example
  * // if you have these extensions files : .woff .eot .woff2
@@ -1666,6 +1704,7 @@
  * - sugar.size.abs.cover : ```.abs-cover```
  * - sugar.size.abs.contain : ```.abs-contain```
  * - sugar.size.abs.fit : ```.abs-fit```
+ * - sugar.media.object : ```.mo .mo--center .mo--end .mo__content```
  * - sugar.clearfix.default : ```.clearfix```
  * - sugar.clearfix.float : ```.clearfix-float```
  * - sugar.clearfix.micro : ```.clearfix-micro```
@@ -2209,6 +2248,38 @@
   left: 0;
 }
 
+.mo {
+  /**
+	 * @name 		```.mo .mo--center .mo__content```
+	 * Famous media object class
+	 * @styleguide 	Helpers / Media object
+	 * @example 	html
+	 * <div class="mo">
+	 *   <div class="mo__content">
+	 *     <img src="https://source.unsplash.com/random/100x100" />
+	 *   </div>
+	 *   <div class="mo__content">
+	 *     <h2 class="h3">Hello World</h2>
+	 *     <p class="p">Phasellus fringilla aliquet justo eget pulvinar. Donec in justo leo.</p>
+	 *   </div>
+	 * </div>
+	 */
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.mo--center {
+  align-items: center;
+}
+
+.mo--end {
+  align-items: flex-end;
+}
+
+.mo__content {
+  flex: 0 1 auto;
+}
+
 .clearfix {
   /**
 	 * @name 		```.clearfix```
@@ -2293,14 +2364,18 @@
 	 * <div class="bkg-primary ratio-21-9"></div>
 	 */
   position: relative;
-  overflow: hidden;
 }
 
-.ratio-21-9:before {
+.ratio-21-9::before {
+  content: '';
+  padding-top: 42.85714%;
+  float: left;
+}
+
+.ratio-21-9::after {
   content: '';
   display: block;
-  height: 0;
-  padding-top: 42.85714%;
+  clear: both;
 }
 
 .ratio-16-9 {
@@ -2312,14 +2387,18 @@
 	 * <div class="bkg-primary ratio-16-9"></div>
 	 */
   position: relative;
-  overflow: hidden;
 }
 
-.ratio-16-9:before {
+.ratio-16-9::before {
+  content: '';
+  padding-top: 56.25%;
+  float: left;
+}
+
+.ratio-16-9::after {
   content: '';
   display: block;
-  height: 0;
-  padding-top: 56.25%;
+  clear: both;
 }
 
 .ratio-4-3 {
@@ -2331,14 +2410,18 @@
 	 * <div class="bkg-primary ratio-4-3"></div>
 	 */
   position: relative;
-  overflow: hidden;
 }
 
-.ratio-4-3:before {
+.ratio-4-3::before {
+  content: '';
+  padding-top: 75%;
+  float: left;
+}
+
+.ratio-4-3::after {
   content: '';
   display: block;
-  height: 0;
-  padding-top: 75%;
+  clear: both;
 }
 
 .ratio-1-1 {
@@ -2350,14 +2433,18 @@
 	 * <div class="bkg-primary ratio-1-1"></div>
 	 */
   position: relative;
-  overflow: hidden;
 }
 
-.ratio-1-1:before {
+.ratio-1-1::before {
+  content: '';
+  padding-top: 100%;
+  float: left;
+}
+
+.ratio-1-1::after {
   content: '';
   display: block;
-  height: 0;
-  padding-top: 100%;
+  clear: both;
 }
 
 .no-transitions {
@@ -2661,6 +2748,196 @@
  * }
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name 	SSelectComponent Classes
+ * This file provide the mixins to generate s-select classes
+ */
+.s-select__selection-tag {
+  display: inline-block;
+}
+
+.s-select__reset {
+  background-size: 100% 100%;
+  background-color: transparent;
+  border: none;
+  position: absolute;
+}
+
+.s-select__selection-tag-close {
+  background-size: 100% 100%;
+}
+
+/**
+ * Provide all the classes of the s-select component for a default style
+ * Styling options:
+ * - ```[color="{$color}"]``` : apply a color to the select component
+ * @param 		{List<Color>} 		[$colors=default primary secondary] 		The colors to generate
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Provide the bare styling for the s-select classes
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Provide all the style classes of the s-select component for a default style
+ * Styling options:
+ * - ```[color="{$color}"]``` : apply a color to the select component
+ * @param 		{List<Color>} 		[$colors=default primary secondary] 		The colors to generate
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * @name 	SFormComponent
+ * This file provide the mixins and functions to create form elements
+ */
+.s-select, .s-select .s-select__search-field {
+  display: inline-block;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 1em;
+}
+
+.s-select, select[is="s-select"][color="default"] + .s-select, select[is="s-select"][color="primary"] + .s-select,
+.s-select--primary, select[is="s-select"][color="secondary"] + .s-select,
+.s-select--secondary {
+  border-width: 1px;
+  border-style: solid;
+}
+
+.s-select:disabled, select[is="s-select"][color="default"] + .s-select:disabled, select[is="s-select"][color="primary"] + .s-select:disabled,
+.s-select--primary:disabled, select[is="s-select"][color="secondary"] + .s-select:disabled,
+.s-select--secondary:disabled {
+  cursor: not-allowed;
+}
+
+/**
+ * Set the styling for field sizes like padding, height, etc...
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Set the styling for field color like borders
+ * @param 		{Color} 		$color 		The color wanted for the field
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Apply the bare and style css for input field (text, email, etc...)
+ * @param 		{Color} 		[$color=default] 		The color wanted for the field
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Apply the bare css for input field (text, email, etc...)
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Apply the style css for input field (text, email, etc...)
+ * @param 		{Color} 		[$color=default] 		The color wanted for the field
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Apply the bare and style css for textarea
+ * @param 		{Color} 		[$color=default] 		The color wanted for the textarea
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Set the styling for textarea sizes like padding, etc...
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Apply the bare css for textarea
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Apply the style css for textarea
+ * @param 		{Color} 		[$color=default] 		The color wanted for the textarea
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+* Apply the bare and style css for select
+* @param 		{Color} 		[$color=default] 		The color wanted for the select
+* @author 		Olivier Bossel <olivier.bossel@gmail.com>
+*/
+/**
+ * Set the styling for select colors like background arrow, etc...
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+* Apply the bare css for select
+* @author 		Olivier Bossel <olivier.bossel@gmail.com>
+*/
+/**
+* Apply the style css for select
+* @param 		{Color} 		[$color=default] 		The color wanted for the select
+* @author 		Olivier Bossel <olivier.bossel@gmail.com>
+*/
+/**
+* Apply the bare and style css for form group
+* @author 		Olivier Bossel <olivier.bossel@gmail.com>
+*/
+/**
+* Apply the bare css for form group
+* @author 		Olivier Bossel <olivier.bossel@gmail.com>
+*/
+/**
+* Apply the style css for form group
+* @author 		Olivier Bossel <olivier.bossel@gmail.com>
+*/
+/**
+* Apply the bare and style css for form addon
+* @param 		{Color} 		[$color=default] 		The color wanted for the form addon
+* @author 		Olivier Bossel <olivier.bossel@gmail.com>
+*/
+/**
+* Apply the bare css for form group
+* @author 		Olivier Bossel <olivier.bossel@gmail.com>
+*/
+/**
+* Apply the bare and style css for form group
+* @param 		{Color} 		[$color=default] 		The color wanted for the select
+* @author 		Olivier Bossel <olivier.bossel@gmail.com>
+*/
+/**
+ * @name 	SFormComponent Classes
+ * This file provide the mixins to generate form classes
+ */
+/**
+ * Provide all the classes of the form component like .form-input, .form-textarea, etc...
+ * - ```.form-input```
+ * - ```.form-input--{color}```
+ * - ```.form-textarea```
+ * - ```.form-textarea--{color}```
+ * - ```.form-select```
+ * - ```.form-select--{color}```
+ * - ```.form-group````
+ * - ```.form-addon```
+ * - ```.form-addon--{color}```
+ * @param 		{List<Color>} 		[$colors=default primary secondary] 		The colors to generate
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Provide all the bare classes of the form component like .form-input, .form-textarea, etc...
+ * - ```.form-input```
+ * - ```.form-textarea```
+ * - ```.form-select```
+ * - ```.form-group````
+ * - ```.form-addon```
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
+ */
+/**
+ * Provide all the style classes of the form component like .form-input, .form-textarea, etc...
+ * - ```.form-input```
+ * - ```.form-input--{color}```
+ * - ```.form-textarea```
+ * - ```.form-textarea--{color}```
+ * - ```.form-select```
+ * - ```.form-select--{color}```
+ * - ```.form-group````
+ * - ```.form-addon```
+ * - ```.form-addon--{color}```
+ * @param 		{List<Color>} 		[$colors=default primary secondary] 		The colors to generate
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com>
  */
 html,
 body {
@@ -3037,6 +3314,599 @@ html .clear-completed:active {
   }
 }
 
+.s-select__option--disabled {
+  opacity: 0.5;
+}
+
+.s-select__selection-tag-close {
+  height: 0.8em;
+  width: 0.8em;
+  vertical-align: middle;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.s-select__reset {
+  right: 3.5em;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 1em;
+  width: 1em;
+  vertical-align: middle;
+  cursor: pointer;
+  outline: none;
+  font-size: .8em;
+}
+
+.s-select__search-field {
+  border-radius: 0em;
+  padding: 0.8em 1.4em;
+}
+
+.s-select {
+  font-family: "Helvetica Neue", Helvetica, Verdana, Arial, sans-serif;
+  font-weight: normal;
+  background-size: 9px 6px;
+  background-position: right center;
+  background-origin: content-box;
+  background-repeat: no-repeat;
+  background-color: white;
+  border-radius: 0em;
+  padding: 0 1.4em;
+  height: 2.6em;
+}
+
+.s-select:not(input):not(select) {
+  padding: 0.8em 1.4em;
+}
+
+.s-select::-ms-expand {
+  display: none;
+}
+
+.s-select.s-select--multiple {
+  transition: none;
+}
+
+.s-select.s-select--multiple:not(.s-select--placeholder) {
+  padding: 0.24em 1.4em;
+  height: auto !important;
+}
+
+.s-select .s-select__dropdown {
+  border-radius: 0em;
+}
+
+.s-select .s-select__search-container {
+  padding: 0.8em;
+}
+
+.s-select .s-select__search-field {
+  font-family: "Helvetica Neue", Helvetica, Verdana, Arial, sans-serif;
+  font-weight: normal;
+  border-radius: 0em;
+  padding: 0 1.4em;
+  height: 2.6em;
+  border-radius: 0em;
+}
+
+.s-select .s-select__search-field:not(input):not(select) {
+  padding: 0.8em 1.4em;
+}
+
+.s-select .s-select__search-field::-webkit-contacts-auto-fill-button {
+  visibility: hidden;
+  display: none !important;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+}
+
+.s-select .s-select__search-field::-ms-clear {
+  display: none;
+}
+
+.s-select .s-select__selection-tag {
+  border-radius: 0em;
+  font-size: 0.9em;
+  margin-right: 0.46667em;
+  margin-top: 0.24em;
+  margin-bottom: 0.24em;
+  height: calc(0.8em + 0.9em);
+  line-height: calc(0.8em + 0.9em + 0.1em);
+  padding: 0 0.7em;
+  position: relative;
+  left: -0.7em;
+}
+
+.s-select .s-select__selection-tag-close {
+  margin-left: 0.46667em;
+}
+
+.s-select .s-select__option:not(.s-select__option--custom),
+.s-select .s-select__optgroup:not(.s-select__optgroup--custom) {
+  padding: 0.8em 1.4em;
+}
+
+.s-select .s-select__option--in-optgroup {
+  padding-left: 2.1em !important;
+}
+
+.s-select {
+  background-color: white;
+  color: #848e91;
+  transition: border 0.1s ease-in-out 0s, outline-color 0s linear 0s;
+  outline-color: black;
+  border-color: rgba(132, 142, 145, 0.1);
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath style='fill:%23848e91' d='M12 21l-12-18h24z'/%3E%3C/svg%3E");
+}
+
+.s-select::-webkit-input-placeholder {
+  color: rgba(132, 142, 145, 0.4);
+}
+
+.s-select:-moz-placeholder {
+  color: rgba(132, 142, 145, 0.4);
+}
+
+.s-select::-moz-placeholder {
+  color: rgba(132, 142, 145, 0.4);
+}
+
+.s-select:-ms-input-placeholder {
+  color: rgba(132, 142, 145, 0.4);
+}
+
+.input--placeholder {
+  color: rgba(132, 142, 145, 0.4);
+}
+
+.s-select:disabled {
+  opacity: 0.5;
+}
+
+[data-input-activator]:focus ~ .s-select,
+[data-input-activator]:checked ~ .s-select, .s-select:hover:not(:disabled) {
+  border-bottom-color: rgba(132, 142, 145, 0.6);
+}
+
+[data-input-activator]:focus ~ .s-select,
+[data-input-activator]:checked ~ .s-select, .s-select:focus:not(:disabled), .s-select.active:not(:disabled) {
+  border-color: rgba(132, 142, 145, 0.6);
+}
+
+.s-select[dirty]:invalid, .s-select[dirty][invalid] {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath style='fill:%23d9534f' d='M12 21l-12-18h24z'/%3E%3C/svg%3E");
+}
+
+.s-select[dirty]:invalid, .s-select[dirty][invalid] {
+  border-color: #d9534f !important;
+}
+
+.s-select.vr,
+.vr .s-select {
+  margin-bottom: 1rem;
+}
+
+select:disabled + .s-select {
+  opacity: 0.5;
+}
+
+.s-select__search-field {
+  width: 100%;
+  height: 100%;
+  outline: none;
+  color: #848e91;
+  background-color: white;
+  border: 1px solid rgba(132, 142, 145, 0.5);
+}
+
+.s-select__search-field::-webkit-input-placeholder {
+  color: rgba(132, 142, 145, 0.4);
+}
+
+.s-select__search-field:-moz-placeholder {
+  color: rgba(132, 142, 145, 0.4);
+}
+
+.s-select__search-field::-moz-placeholder {
+  color: rgba(132, 142, 145, 0.4);
+}
+
+.s-select__search-field:-ms-input-placeholder {
+  color: rgba(132, 142, 145, 0.4);
+}
+
+.input--placeholder {
+  color: rgba(132, 142, 145, 0.4);
+}
+
+.s-select__dropdown {
+  top: calc(100% + 3px);
+  margin-top: 1.42857rem;
+  transition: all 0.1s ease-in-out 0s, outline-color 0s linear 0s;
+  outline-color: black;
+  background: white;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 20px 30px;
+}
+
+.s-select--opened .s-select__dropdown {
+  margin-top: 0;
+}
+
+.s-select .s-select__optgroup:not(.s-select__optgroup--custom) {
+  font-weight: bold;
+}
+
+.s-select__option {
+  color: #848e91;
+  transition: background 0.1s ease-in-out 0s, outline-color 0s linear 0s;
+  outline-color: black;
+}
+
+select[required] + .s-select--placeholder .s-select__selection:after {
+  content: ' *';
+  color: #d9534f;
+  font-size: .7em;
+}
+
+select[is="s-select"][color="default"] + .s-select,
+.s-select {
+  color: #848e91;
+  transition: border 0.1s ease-in-out 0s, outline-color 0s linear 0s;
+  outline-color: black;
+  border-color: rgba(132, 142, 145, 0.1);
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath style='fill:%23848e91' d='M12 21l-12-18h24z'/%3E%3C/svg%3E");
+}
+
+select[is="s-select"][color="default"] + .s-select::-webkit-input-placeholder,
+.s-select::-webkit-input-placeholder {
+  color: rgba(132, 142, 145, 0.4);
+}
+
+select[is="s-select"][color="default"] + .s-select:-moz-placeholder,
+.s-select:-moz-placeholder {
+  color: rgba(132, 142, 145, 0.4);
+}
+
+select[is="s-select"][color="default"] + .s-select::-moz-placeholder,
+.s-select::-moz-placeholder {
+  color: rgba(132, 142, 145, 0.4);
+}
+
+select[is="s-select"][color="default"] + .s-select:-ms-input-placeholder,
+.s-select:-ms-input-placeholder {
+  color: rgba(132, 142, 145, 0.4);
+}
+
+.input--placeholder {
+  color: rgba(132, 142, 145, 0.4);
+}
+
+select[is="s-select"][color="default"] + .s-select:disabled,
+.s-select:disabled {
+  opacity: 0.5;
+}
+
+[data-input-activator]:focus ~ select[is="s-select"][color="default"] + .s-select,
+[data-input-activator]:checked ~ select[is="s-select"][color="default"] + .s-select, select[is="s-select"][color="default"] + .s-select:hover:not(:disabled), [data-input-activator]:focus ~
+.s-select,
+[data-input-activator]:checked ~
+.s-select,
+.s-select:hover:not(:disabled) {
+  border-bottom-color: rgba(132, 142, 145, 0.6);
+}
+
+[data-input-activator]:focus ~ select[is="s-select"][color="default"] + .s-select,
+[data-input-activator]:checked ~ select[is="s-select"][color="default"] + .s-select, select[is="s-select"][color="default"] + .s-select:focus:not(:disabled), select[is="s-select"][color="default"] + .s-select.active:not(:disabled), [data-input-activator]:focus ~
+.s-select,
+[data-input-activator]:checked ~
+.s-select,
+.s-select:focus:not(:disabled),
+.s-select.active:not(:disabled) {
+  border-color: rgba(132, 142, 145, 0.6);
+}
+
+select[is="s-select"][color="default"] + .s-select[dirty]:invalid, select[is="s-select"][color="default"] + .s-select[dirty][invalid],
+.s-select[dirty]:invalid,
+.s-select[dirty][invalid] {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath style='fill:%23d9534f' d='M12 21l-12-18h24z'/%3E%3C/svg%3E");
+}
+
+select[is="s-select"][color="default"] + .s-select[dirty]:invalid, select[is="s-select"][color="default"] + .s-select[dirty][invalid],
+.s-select[dirty]:invalid,
+.s-select[dirty][invalid] {
+  border-color: #d9534f !important;
+}
+
+select[is="s-select"][color="default"] + .s-select .s-select__search-container,
+.s-select .s-select__search-container {
+  background: rgba(132, 142, 145, 0.1);
+  border-bottom: 1px solid rgba(132, 142, 145, 0.2);
+}
+
+select[is="s-select"][color="default"] + .s-select .s-select__selection-tag,
+.s-select .s-select__selection-tag {
+  background: rgba(132, 142, 145, 0.6);
+  color: white;
+}
+
+select[is="s-select"][color="default"] + .s-select .s-select__reset,
+select[is="s-select"][color="default"] + .s-select .s-select__selection-tag-close,
+.s-select .s-select__reset,
+.s-select .s-select__selection-tag-close {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><style>path{fill%3A%23848e91;}</style><path d="M443.6,387.1L312.4,255.4l131.5-130c5.4-5.4,5.4-14.2,0-19.6l-37.4-37.6c-2.6-2.6-6.1-4-9.8-4c-3.7,0-7.2,1.5-9.8,4  L256,197.8L124.9,68.3c-2.6-2.6-6.1-4-9.8-4c-3.7,0-7.2,1.5-9.8,4L68,105.9c-5.4,5.4-5.4,14.2,0,19.6l131.5,130L68.4,387.1  c-2.6,2.6-4.1,6.1-4.1,9.8c0,3.7,1.4,7.2,4.1,9.8l37.4,37.6c2.7,2.7,6.2,4.1,9.8,4.1c3.5,0,7.1-1.3,9.8-4.1L256,313.1l130.7,131.1  c2.7,2.7,6.2,4.1,9.8,4.1c3.5,0,7.1-1.3,9.8-4.1l37.4-37.6c2.6-2.6,4.1-6.1,4.1-9.8C447.7,393.2,446.2,389.7,443.6,387.1z"/></svg>');
+  opacity: .65;
+}
+
+select[is="s-select"][color="default"] + .s-select .s-select__reset:hover,
+select[is="s-select"][color="default"] + .s-select .s-select__selection-tag-close:hover,
+.s-select .s-select__reset:hover,
+.s-select .s-select__selection-tag-close:hover {
+  opacity: 1;
+}
+
+select[is="s-select"][color="default"] + .s-select .s-select__option--selected,
+.s-select .s-select__option--selected {
+  background: rgba(132, 142, 145, 0.2);
+}
+
+select[is="s-select"][color="default"] + .s-select .s-select__option.active,
+.s-select .s-select__option.active {
+  background: rgba(132, 142, 145, 0.3);
+}
+
+select[is="s-select"][color="default"] + .s-select .s-select__option:hover, select[is="s-select"][color="default"] + .s-select .s-select__option:active,
+.s-select .s-select__option:hover,
+.s-select .s-select__option:active {
+  background: rgba(132, 142, 145, 0.6);
+  color: white;
+}
+
+select[is="s-select"][color="default"] + .s-select .s-select__search-result,
+.s-select .s-select__search-result {
+  background: #848e91;
+  color: white;
+}
+
+select[is="s-select"][color="primary"] + .s-select,
+.s-select--primary {
+  color: #848e91;
+  transition: border 0.1s ease-in-out 0s, outline-color 0s linear 0s;
+  outline-color: black;
+  border-color: rgba(242, 188, 43, 0.1);
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath style='fill:%23f2bc2b' d='M12 21l-12-18h24z'/%3E%3C/svg%3E");
+}
+
+select[is="s-select"][color="primary"] + .s-select::-webkit-input-placeholder,
+.s-select--primary::-webkit-input-placeholder {
+  color: rgba(132, 142, 145, 0.4);
+}
+
+select[is="s-select"][color="primary"] + .s-select:-moz-placeholder,
+.s-select--primary:-moz-placeholder {
+  color: rgba(132, 142, 145, 0.4);
+}
+
+select[is="s-select"][color="primary"] + .s-select::-moz-placeholder,
+.s-select--primary::-moz-placeholder {
+  color: rgba(132, 142, 145, 0.4);
+}
+
+select[is="s-select"][color="primary"] + .s-select:-ms-input-placeholder,
+.s-select--primary:-ms-input-placeholder {
+  color: rgba(132, 142, 145, 0.4);
+}
+
+.input--placeholder {
+  color: rgba(132, 142, 145, 0.4);
+}
+
+select[is="s-select"][color="primary"] + .s-select:disabled,
+.s-select--primary:disabled {
+  opacity: 0.5;
+}
+
+[data-input-activator]:focus ~ select[is="s-select"][color="primary"] + .s-select,
+[data-input-activator]:checked ~ select[is="s-select"][color="primary"] + .s-select, select[is="s-select"][color="primary"] + .s-select:hover:not(:disabled), [data-input-activator]:focus ~
+.s-select--primary,
+[data-input-activator]:checked ~
+.s-select--primary,
+.s-select--primary:hover:not(:disabled) {
+  border-bottom-color: rgba(242, 188, 43, 0.6);
+}
+
+[data-input-activator]:focus ~ select[is="s-select"][color="primary"] + .s-select,
+[data-input-activator]:checked ~ select[is="s-select"][color="primary"] + .s-select, select[is="s-select"][color="primary"] + .s-select:focus:not(:disabled), select[is="s-select"][color="primary"] + .s-select.active:not(:disabled), [data-input-activator]:focus ~
+.s-select--primary,
+[data-input-activator]:checked ~
+.s-select--primary,
+.s-select--primary:focus:not(:disabled),
+.s-select--primary.active:not(:disabled) {
+  border-color: rgba(242, 188, 43, 0.6);
+}
+
+select[is="s-select"][color="primary"] + .s-select[dirty]:invalid, select[is="s-select"][color="primary"] + .s-select[dirty][invalid],
+.s-select--primary[dirty]:invalid,
+.s-select--primary[dirty][invalid] {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath style='fill:%23d9534f' d='M12 21l-12-18h24z'/%3E%3C/svg%3E");
+}
+
+select[is="s-select"][color="primary"] + .s-select[dirty]:invalid, select[is="s-select"][color="primary"] + .s-select[dirty][invalid],
+.s-select--primary[dirty]:invalid,
+.s-select--primary[dirty][invalid] {
+  border-color: #d9534f !important;
+}
+
+select[is="s-select"][color="primary"] + .s-select .s-select__search-container,
+.s-select--primary .s-select__search-container {
+  background: rgba(242, 188, 43, 0.1);
+  border-bottom: 1px solid rgba(242, 188, 43, 0.2);
+}
+
+select[is="s-select"][color="primary"] + .s-select .s-select__selection-tag,
+.s-select--primary .s-select__selection-tag {
+  background: rgba(242, 188, 43, 0.6);
+  color: white;
+}
+
+select[is="s-select"][color="primary"] + .s-select .s-select__reset,
+select[is="s-select"][color="primary"] + .s-select .s-select__selection-tag-close,
+.s-select--primary .s-select__reset,
+.s-select--primary .s-select__selection-tag-close {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><style>path{fill%3A%23f2bc2b;}</style><path d="M443.6,387.1L312.4,255.4l131.5-130c5.4-5.4,5.4-14.2,0-19.6l-37.4-37.6c-2.6-2.6-6.1-4-9.8-4c-3.7,0-7.2,1.5-9.8,4  L256,197.8L124.9,68.3c-2.6-2.6-6.1-4-9.8-4c-3.7,0-7.2,1.5-9.8,4L68,105.9c-5.4,5.4-5.4,14.2,0,19.6l131.5,130L68.4,387.1  c-2.6,2.6-4.1,6.1-4.1,9.8c0,3.7,1.4,7.2,4.1,9.8l37.4,37.6c2.7,2.7,6.2,4.1,9.8,4.1c3.5,0,7.1-1.3,9.8-4.1L256,313.1l130.7,131.1  c2.7,2.7,6.2,4.1,9.8,4.1c3.5,0,7.1-1.3,9.8-4.1l37.4-37.6c2.6-2.6,4.1-6.1,4.1-9.8C447.7,393.2,446.2,389.7,443.6,387.1z"/></svg>');
+  opacity: .65;
+}
+
+select[is="s-select"][color="primary"] + .s-select .s-select__reset:hover,
+select[is="s-select"][color="primary"] + .s-select .s-select__selection-tag-close:hover,
+.s-select--primary .s-select__reset:hover,
+.s-select--primary .s-select__selection-tag-close:hover {
+  opacity: 1;
+}
+
+select[is="s-select"][color="primary"] + .s-select .s-select__option--selected,
+.s-select--primary .s-select__option--selected {
+  background: rgba(242, 188, 43, 0.2);
+}
+
+select[is="s-select"][color="primary"] + .s-select .s-select__option.active,
+.s-select--primary .s-select__option.active {
+  background: rgba(242, 188, 43, 0.3);
+}
+
+select[is="s-select"][color="primary"] + .s-select .s-select__option:hover, select[is="s-select"][color="primary"] + .s-select .s-select__option:active,
+.s-select--primary .s-select__option:hover,
+.s-select--primary .s-select__option:active {
+  background: rgba(242, 188, 43, 0.6);
+  color: white;
+}
+
+select[is="s-select"][color="primary"] + .s-select .s-select__search-result,
+.s-select--primary .s-select__search-result {
+  background: #f2bc2b;
+  color: white;
+}
+
+select[is="s-select"][color="secondary"] + .s-select,
+.s-select--secondary {
+  color: #848e91;
+  transition: border 0.1s ease-in-out 0s, outline-color 0s linear 0s;
+  outline-color: black;
+  border-color: rgba(43, 52, 56, 0.1);
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath style='fill:%232b3438' d='M12 21l-12-18h24z'/%3E%3C/svg%3E");
+}
+
+select[is="s-select"][color="secondary"] + .s-select::-webkit-input-placeholder,
+.s-select--secondary::-webkit-input-placeholder {
+  color: rgba(132, 142, 145, 0.4);
+}
+
+select[is="s-select"][color="secondary"] + .s-select:-moz-placeholder,
+.s-select--secondary:-moz-placeholder {
+  color: rgba(132, 142, 145, 0.4);
+}
+
+select[is="s-select"][color="secondary"] + .s-select::-moz-placeholder,
+.s-select--secondary::-moz-placeholder {
+  color: rgba(132, 142, 145, 0.4);
+}
+
+select[is="s-select"][color="secondary"] + .s-select:-ms-input-placeholder,
+.s-select--secondary:-ms-input-placeholder {
+  color: rgba(132, 142, 145, 0.4);
+}
+
+.input--placeholder {
+  color: rgba(132, 142, 145, 0.4);
+}
+
+select[is="s-select"][color="secondary"] + .s-select:disabled,
+.s-select--secondary:disabled {
+  opacity: 0.5;
+}
+
+[data-input-activator]:focus ~ select[is="s-select"][color="secondary"] + .s-select,
+[data-input-activator]:checked ~ select[is="s-select"][color="secondary"] + .s-select, select[is="s-select"][color="secondary"] + .s-select:hover:not(:disabled), [data-input-activator]:focus ~
+.s-select--secondary,
+[data-input-activator]:checked ~
+.s-select--secondary,
+.s-select--secondary:hover:not(:disabled) {
+  border-bottom-color: rgba(43, 52, 56, 0.6);
+}
+
+[data-input-activator]:focus ~ select[is="s-select"][color="secondary"] + .s-select,
+[data-input-activator]:checked ~ select[is="s-select"][color="secondary"] + .s-select, select[is="s-select"][color="secondary"] + .s-select:focus:not(:disabled), select[is="s-select"][color="secondary"] + .s-select.active:not(:disabled), [data-input-activator]:focus ~
+.s-select--secondary,
+[data-input-activator]:checked ~
+.s-select--secondary,
+.s-select--secondary:focus:not(:disabled),
+.s-select--secondary.active:not(:disabled) {
+  border-color: rgba(43, 52, 56, 0.6);
+}
+
+select[is="s-select"][color="secondary"] + .s-select[dirty]:invalid, select[is="s-select"][color="secondary"] + .s-select[dirty][invalid],
+.s-select--secondary[dirty]:invalid,
+.s-select--secondary[dirty][invalid] {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath style='fill:%23d9534f' d='M12 21l-12-18h24z'/%3E%3C/svg%3E");
+}
+
+select[is="s-select"][color="secondary"] + .s-select[dirty]:invalid, select[is="s-select"][color="secondary"] + .s-select[dirty][invalid],
+.s-select--secondary[dirty]:invalid,
+.s-select--secondary[dirty][invalid] {
+  border-color: #d9534f !important;
+}
+
+select[is="s-select"][color="secondary"] + .s-select .s-select__search-container,
+.s-select--secondary .s-select__search-container {
+  background: rgba(43, 52, 56, 0.1);
+  border-bottom: 1px solid rgba(43, 52, 56, 0.2);
+}
+
+select[is="s-select"][color="secondary"] + .s-select .s-select__selection-tag,
+.s-select--secondary .s-select__selection-tag {
+  background: rgba(43, 52, 56, 0.6);
+  color: white;
+}
+
+select[is="s-select"][color="secondary"] + .s-select .s-select__reset,
+select[is="s-select"][color="secondary"] + .s-select .s-select__selection-tag-close,
+.s-select--secondary .s-select__reset,
+.s-select--secondary .s-select__selection-tag-close {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><style>path{fill%3A%232b3438;}</style><path d="M443.6,387.1L312.4,255.4l131.5-130c5.4-5.4,5.4-14.2,0-19.6l-37.4-37.6c-2.6-2.6-6.1-4-9.8-4c-3.7,0-7.2,1.5-9.8,4  L256,197.8L124.9,68.3c-2.6-2.6-6.1-4-9.8-4c-3.7,0-7.2,1.5-9.8,4L68,105.9c-5.4,5.4-5.4,14.2,0,19.6l131.5,130L68.4,387.1  c-2.6,2.6-4.1,6.1-4.1,9.8c0,3.7,1.4,7.2,4.1,9.8l37.4,37.6c2.7,2.7,6.2,4.1,9.8,4.1c3.5,0,7.1-1.3,9.8-4.1L256,313.1l130.7,131.1  c2.7,2.7,6.2,4.1,9.8,4.1c3.5,0,7.1-1.3,9.8-4.1l37.4-37.6c2.6-2.6,4.1-6.1,4.1-9.8C447.7,393.2,446.2,389.7,443.6,387.1z"/></svg>');
+  opacity: .65;
+}
+
+select[is="s-select"][color="secondary"] + .s-select .s-select__reset:hover,
+select[is="s-select"][color="secondary"] + .s-select .s-select__selection-tag-close:hover,
+.s-select--secondary .s-select__reset:hover,
+.s-select--secondary .s-select__selection-tag-close:hover {
+  opacity: 1;
+}
+
+select[is="s-select"][color="secondary"] + .s-select .s-select__option--selected,
+.s-select--secondary .s-select__option--selected {
+  background: rgba(43, 52, 56, 0.2);
+}
+
+select[is="s-select"][color="secondary"] + .s-select .s-select__option.active,
+.s-select--secondary .s-select__option.active {
+  background: rgba(43, 52, 56, 0.3);
+}
+
+select[is="s-select"][color="secondary"] + .s-select .s-select__option:hover, select[is="s-select"][color="secondary"] + .s-select .s-select__option:active,
+.s-select--secondary .s-select__option:hover,
+.s-select--secondary .s-select__option:active {
+  background: rgba(43, 52, 56, 0.6);
+  color: white;
+}
+
+select[is="s-select"][color="secondary"] + .s-select .s-select__search-result,
+.s-select--secondary .s-select__search-result {
+  background: #2b3438;
+  color: white;
+}
+
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
   margin: 0;
   padding: 0;
@@ -3174,6 +4044,7 @@ body {
 				 * @font-family 	Helvetica Neue, Helvetica, Verdana, Arial, sans-serif
 				 * @font-style 		
 				 * @font-weight 	normal
+				 * @font-display    
 				 */
 /**
 				 * @name   			quote
@@ -3182,6 +4053,7 @@ body {
 				 * @font-family 	Palatino, Times, Georgia, serif
 				 * @font-style 		
 				 * @font-weight 	normal
+				 * @font-display    
 				 */
 /**
 				 * @name   			code
@@ -3190,6 +4062,7 @@ body {
 				 * @font-family 	Menlo, Monaco, Consolas, Courier New, monospace
 				 * @font-style 		
 				 * @font-weight 	normal
+				 * @font-display    
 				 */
 /**
 			 * @name 	```.tr-fast```
@@ -4326,6 +5199,85 @@ body {
 }
 
 /**
+				 * @name 	```.b-default```
+				 * Specify the border of 1px solid to **default**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-default">
+				 * 	I have a default border color
+				 * </div>
+				 */
+.b-default {
+  border: 0.07143rem solid #848e91;
+}
+
+/**
+				 * @name 	```.b-t-default```
+				 * Specify the border top of 1px solid to **default**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-t-default">
+				 * 	I have a default border top color
+				 * </div>
+				 */
+.b-t-default {
+  border-top: 0.07143rem solid #848e91;
+}
+
+/**
+				 * @name 	```.b-r-default```
+				 * Specify the border right of 1px solid to **default**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-r-default">
+				 * 	I have a default border right color
+				 * </div>
+				 */
+.b-r-default {
+  border-right: 0.07143rem solid #848e91;
+}
+
+/**
+				 * @name 	```.b-b-default```
+				 * Specify the border bottom of 1px solid to **default**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-b-default">
+				 * 	I have a default border bottom color
+				 * </div>
+				 */
+.b-b-default {
+  border-bottom: 0.07143rem solid #848e91;
+}
+
+/**
+				 * @name 	```.b-l-default```
+				 * Specify the border left of 1px solid to **default**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-l-default">
+				 * 	I have a default border left color
+				 * </div>
+				 */
+.b-l-default {
+  border-left: 0.07143rem solid #848e91;
+}
+
+/**
+				 * @name 	```.b-s-default```
+				 * Specify the border side of 1px solid to **default**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-s-default">
+				 * 	I have a default border side color
+				 * </div>
+				 */
+.b-s-default {
+  border-left: 0.07143rem solid #848e91;
+  border-right: 0.07143rem solid #848e91;
+}
+
+/**
 				 * @name 	```.c-title```
 				 * Specify the color to **title**
 				 * @styleguide  	Colors / Classes
@@ -4349,6 +5301,85 @@ body {
 				 */
 .bkg-title {
   background-color: #2b3438;
+}
+
+/**
+				 * @name 	```.b-title```
+				 * Specify the border of 1px solid to **title**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-title">
+				 * 	I have a title border color
+				 * </div>
+				 */
+.b-title {
+  border: 0.07143rem solid #2b3438;
+}
+
+/**
+				 * @name 	```.b-t-title```
+				 * Specify the border top of 1px solid to **title**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-t-title">
+				 * 	I have a title border top color
+				 * </div>
+				 */
+.b-t-title {
+  border-top: 0.07143rem solid #2b3438;
+}
+
+/**
+				 * @name 	```.b-r-title```
+				 * Specify the border right of 1px solid to **title**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-r-title">
+				 * 	I have a title border right color
+				 * </div>
+				 */
+.b-r-title {
+  border-right: 0.07143rem solid #2b3438;
+}
+
+/**
+				 * @name 	```.b-b-title```
+				 * Specify the border bottom of 1px solid to **title**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-b-title">
+				 * 	I have a title border bottom color
+				 * </div>
+				 */
+.b-b-title {
+  border-bottom: 0.07143rem solid #2b3438;
+}
+
+/**
+				 * @name 	```.b-l-title```
+				 * Specify the border left of 1px solid to **title**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-l-title">
+				 * 	I have a title border left color
+				 * </div>
+				 */
+.b-l-title {
+  border-left: 0.07143rem solid #2b3438;
+}
+
+/**
+				 * @name 	```.b-s-title```
+				 * Specify the border side of 1px solid to **title**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-s-title">
+				 * 	I have a title border side color
+				 * </div>
+				 */
+.b-s-title {
+  border-left: 0.07143rem solid #2b3438;
+  border-right: 0.07143rem solid #2b3438;
 }
 
 /**
@@ -4378,6 +5409,85 @@ body {
 }
 
 /**
+				 * @name 	```.b-text```
+				 * Specify the border of 1px solid to **text**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-text">
+				 * 	I have a text border color
+				 * </div>
+				 */
+.b-text {
+  border: 0.07143rem solid #848e91;
+}
+
+/**
+				 * @name 	```.b-t-text```
+				 * Specify the border top of 1px solid to **text**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-t-text">
+				 * 	I have a text border top color
+				 * </div>
+				 */
+.b-t-text {
+  border-top: 0.07143rem solid #848e91;
+}
+
+/**
+				 * @name 	```.b-r-text```
+				 * Specify the border right of 1px solid to **text**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-r-text">
+				 * 	I have a text border right color
+				 * </div>
+				 */
+.b-r-text {
+  border-right: 0.07143rem solid #848e91;
+}
+
+/**
+				 * @name 	```.b-b-text```
+				 * Specify the border bottom of 1px solid to **text**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-b-text">
+				 * 	I have a text border bottom color
+				 * </div>
+				 */
+.b-b-text {
+  border-bottom: 0.07143rem solid #848e91;
+}
+
+/**
+				 * @name 	```.b-l-text```
+				 * Specify the border left of 1px solid to **text**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-l-text">
+				 * 	I have a text border left color
+				 * </div>
+				 */
+.b-l-text {
+  border-left: 0.07143rem solid #848e91;
+}
+
+/**
+				 * @name 	```.b-s-text```
+				 * Specify the border side of 1px solid to **text**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-s-text">
+				 * 	I have a text border side color
+				 * </div>
+				 */
+.b-s-text {
+  border-left: 0.07143rem solid #848e91;
+  border-right: 0.07143rem solid #848e91;
+}
+
+/**
 				 * @name 	```.c-link```
 				 * Specify the color to **link**
 				 * @styleguide  	Colors / Classes
@@ -4401,6 +5511,85 @@ body {
 				 */
 .bkg-link {
   background-color: #f2bc2b;
+}
+
+/**
+				 * @name 	```.b-link```
+				 * Specify the border of 1px solid to **link**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-link">
+				 * 	I have a link border color
+				 * </div>
+				 */
+.b-link {
+  border: 0.07143rem solid #f2bc2b;
+}
+
+/**
+				 * @name 	```.b-t-link```
+				 * Specify the border top of 1px solid to **link**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-t-link">
+				 * 	I have a link border top color
+				 * </div>
+				 */
+.b-t-link {
+  border-top: 0.07143rem solid #f2bc2b;
+}
+
+/**
+				 * @name 	```.b-r-link```
+				 * Specify the border right of 1px solid to **link**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-r-link">
+				 * 	I have a link border right color
+				 * </div>
+				 */
+.b-r-link {
+  border-right: 0.07143rem solid #f2bc2b;
+}
+
+/**
+				 * @name 	```.b-b-link```
+				 * Specify the border bottom of 1px solid to **link**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-b-link">
+				 * 	I have a link border bottom color
+				 * </div>
+				 */
+.b-b-link {
+  border-bottom: 0.07143rem solid #f2bc2b;
+}
+
+/**
+				 * @name 	```.b-l-link```
+				 * Specify the border left of 1px solid to **link**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-l-link">
+				 * 	I have a link border left color
+				 * </div>
+				 */
+.b-l-link {
+  border-left: 0.07143rem solid #f2bc2b;
+}
+
+/**
+				 * @name 	```.b-s-link```
+				 * Specify the border side of 1px solid to **link**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-s-link">
+				 * 	I have a link border side color
+				 * </div>
+				 */
+.b-s-link {
+  border-left: 0.07143rem solid #f2bc2b;
+  border-right: 0.07143rem solid #f2bc2b;
 }
 
 /**
@@ -4430,6 +5619,85 @@ body {
 }
 
 /**
+				 * @name 	```.b-primary```
+				 * Specify the border of 1px solid to **primary**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-primary">
+				 * 	I have a primary border color
+				 * </div>
+				 */
+.b-primary {
+  border: 0.07143rem solid #f2bc2b;
+}
+
+/**
+				 * @name 	```.b-t-primary```
+				 * Specify the border top of 1px solid to **primary**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-t-primary">
+				 * 	I have a primary border top color
+				 * </div>
+				 */
+.b-t-primary {
+  border-top: 0.07143rem solid #f2bc2b;
+}
+
+/**
+				 * @name 	```.b-r-primary```
+				 * Specify the border right of 1px solid to **primary**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-r-primary">
+				 * 	I have a primary border right color
+				 * </div>
+				 */
+.b-r-primary {
+  border-right: 0.07143rem solid #f2bc2b;
+}
+
+/**
+				 * @name 	```.b-b-primary```
+				 * Specify the border bottom of 1px solid to **primary**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-b-primary">
+				 * 	I have a primary border bottom color
+				 * </div>
+				 */
+.b-b-primary {
+  border-bottom: 0.07143rem solid #f2bc2b;
+}
+
+/**
+				 * @name 	```.b-l-primary```
+				 * Specify the border left of 1px solid to **primary**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-l-primary">
+				 * 	I have a primary border left color
+				 * </div>
+				 */
+.b-l-primary {
+  border-left: 0.07143rem solid #f2bc2b;
+}
+
+/**
+				 * @name 	```.b-s-primary```
+				 * Specify the border side of 1px solid to **primary**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-s-primary">
+				 * 	I have a primary border side color
+				 * </div>
+				 */
+.b-s-primary {
+  border-left: 0.07143rem solid #f2bc2b;
+  border-right: 0.07143rem solid #f2bc2b;
+}
+
+/**
 				 * @name 	```.c-secondary```
 				 * Specify the color to **secondary**
 				 * @styleguide  	Colors / Classes
@@ -4453,6 +5721,85 @@ body {
 				 */
 .bkg-secondary {
   background-color: #2b3438;
+}
+
+/**
+				 * @name 	```.b-secondary```
+				 * Specify the border of 1px solid to **secondary**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-secondary">
+				 * 	I have a secondary border color
+				 * </div>
+				 */
+.b-secondary {
+  border: 0.07143rem solid #2b3438;
+}
+
+/**
+				 * @name 	```.b-t-secondary```
+				 * Specify the border top of 1px solid to **secondary**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-t-secondary">
+				 * 	I have a secondary border top color
+				 * </div>
+				 */
+.b-t-secondary {
+  border-top: 0.07143rem solid #2b3438;
+}
+
+/**
+				 * @name 	```.b-r-secondary```
+				 * Specify the border right of 1px solid to **secondary**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-r-secondary">
+				 * 	I have a secondary border right color
+				 * </div>
+				 */
+.b-r-secondary {
+  border-right: 0.07143rem solid #2b3438;
+}
+
+/**
+				 * @name 	```.b-b-secondary```
+				 * Specify the border bottom of 1px solid to **secondary**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-b-secondary">
+				 * 	I have a secondary border bottom color
+				 * </div>
+				 */
+.b-b-secondary {
+  border-bottom: 0.07143rem solid #2b3438;
+}
+
+/**
+				 * @name 	```.b-l-secondary```
+				 * Specify the border left of 1px solid to **secondary**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-l-secondary">
+				 * 	I have a secondary border left color
+				 * </div>
+				 */
+.b-l-secondary {
+  border-left: 0.07143rem solid #2b3438;
+}
+
+/**
+				 * @name 	```.b-s-secondary```
+				 * Specify the border side of 1px solid to **secondary**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-s-secondary">
+				 * 	I have a secondary border side color
+				 * </div>
+				 */
+.b-s-secondary {
+  border-left: 0.07143rem solid #2b3438;
+  border-right: 0.07143rem solid #2b3438;
 }
 
 /**
@@ -4482,6 +5829,85 @@ body {
 }
 
 /**
+				 * @name 	```.b-success```
+				 * Specify the border of 1px solid to **success**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-success">
+				 * 	I have a success border color
+				 * </div>
+				 */
+.b-success {
+  border: 0.07143rem solid #5cb85c;
+}
+
+/**
+				 * @name 	```.b-t-success```
+				 * Specify the border top of 1px solid to **success**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-t-success">
+				 * 	I have a success border top color
+				 * </div>
+				 */
+.b-t-success {
+  border-top: 0.07143rem solid #5cb85c;
+}
+
+/**
+				 * @name 	```.b-r-success```
+				 * Specify the border right of 1px solid to **success**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-r-success">
+				 * 	I have a success border right color
+				 * </div>
+				 */
+.b-r-success {
+  border-right: 0.07143rem solid #5cb85c;
+}
+
+/**
+				 * @name 	```.b-b-success```
+				 * Specify the border bottom of 1px solid to **success**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-b-success">
+				 * 	I have a success border bottom color
+				 * </div>
+				 */
+.b-b-success {
+  border-bottom: 0.07143rem solid #5cb85c;
+}
+
+/**
+				 * @name 	```.b-l-success```
+				 * Specify the border left of 1px solid to **success**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-l-success">
+				 * 	I have a success border left color
+				 * </div>
+				 */
+.b-l-success {
+  border-left: 0.07143rem solid #5cb85c;
+}
+
+/**
+				 * @name 	```.b-s-success```
+				 * Specify the border side of 1px solid to **success**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-s-success">
+				 * 	I have a success border side color
+				 * </div>
+				 */
+.b-s-success {
+  border-left: 0.07143rem solid #5cb85c;
+  border-right: 0.07143rem solid #5cb85c;
+}
+
+/**
 				 * @name 	```.c-warning```
 				 * Specify the color to **warning**
 				 * @styleguide  	Colors / Classes
@@ -4505,6 +5931,85 @@ body {
 				 */
 .bkg-warning {
   background-color: #f0ad4e;
+}
+
+/**
+				 * @name 	```.b-warning```
+				 * Specify the border of 1px solid to **warning**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-warning">
+				 * 	I have a warning border color
+				 * </div>
+				 */
+.b-warning {
+  border: 0.07143rem solid #f0ad4e;
+}
+
+/**
+				 * @name 	```.b-t-warning```
+				 * Specify the border top of 1px solid to **warning**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-t-warning">
+				 * 	I have a warning border top color
+				 * </div>
+				 */
+.b-t-warning {
+  border-top: 0.07143rem solid #f0ad4e;
+}
+
+/**
+				 * @name 	```.b-r-warning```
+				 * Specify the border right of 1px solid to **warning**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-r-warning">
+				 * 	I have a warning border right color
+				 * </div>
+				 */
+.b-r-warning {
+  border-right: 0.07143rem solid #f0ad4e;
+}
+
+/**
+				 * @name 	```.b-b-warning```
+				 * Specify the border bottom of 1px solid to **warning**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-b-warning">
+				 * 	I have a warning border bottom color
+				 * </div>
+				 */
+.b-b-warning {
+  border-bottom: 0.07143rem solid #f0ad4e;
+}
+
+/**
+				 * @name 	```.b-l-warning```
+				 * Specify the border left of 1px solid to **warning**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-l-warning">
+				 * 	I have a warning border left color
+				 * </div>
+				 */
+.b-l-warning {
+  border-left: 0.07143rem solid #f0ad4e;
+}
+
+/**
+				 * @name 	```.b-s-warning```
+				 * Specify the border side of 1px solid to **warning**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-s-warning">
+				 * 	I have a warning border side color
+				 * </div>
+				 */
+.b-s-warning {
+  border-left: 0.07143rem solid #f0ad4e;
+  border-right: 0.07143rem solid #f0ad4e;
 }
 
 /**
@@ -4534,6 +6039,85 @@ body {
 }
 
 /**
+				 * @name 	```.b-error```
+				 * Specify the border of 1px solid to **error**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-error">
+				 * 	I have a error border color
+				 * </div>
+				 */
+.b-error {
+  border: 0.07143rem solid #d9534f;
+}
+
+/**
+				 * @name 	```.b-t-error```
+				 * Specify the border top of 1px solid to **error**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-t-error">
+				 * 	I have a error border top color
+				 * </div>
+				 */
+.b-t-error {
+  border-top: 0.07143rem solid #d9534f;
+}
+
+/**
+				 * @name 	```.b-r-error```
+				 * Specify the border right of 1px solid to **error**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-r-error">
+				 * 	I have a error border right color
+				 * </div>
+				 */
+.b-r-error {
+  border-right: 0.07143rem solid #d9534f;
+}
+
+/**
+				 * @name 	```.b-b-error```
+				 * Specify the border bottom of 1px solid to **error**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-b-error">
+				 * 	I have a error border bottom color
+				 * </div>
+				 */
+.b-b-error {
+  border-bottom: 0.07143rem solid #d9534f;
+}
+
+/**
+				 * @name 	```.b-l-error```
+				 * Specify the border left of 1px solid to **error**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-l-error">
+				 * 	I have a error border left color
+				 * </div>
+				 */
+.b-l-error {
+  border-left: 0.07143rem solid #d9534f;
+}
+
+/**
+				 * @name 	```.b-s-error```
+				 * Specify the border side of 1px solid to **error**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-s-error">
+				 * 	I have a error border side color
+				 * </div>
+				 */
+.b-s-error {
+  border-left: 0.07143rem solid #d9534f;
+  border-right: 0.07143rem solid #d9534f;
+}
+
+/**
 				 * @name 	```.c-info```
 				 * Specify the color to **info**
 				 * @styleguide  	Colors / Classes
@@ -4557,6 +6141,85 @@ body {
 				 */
 .bkg-info {
   background-color: #2199e8;
+}
+
+/**
+				 * @name 	```.b-info```
+				 * Specify the border of 1px solid to **info**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-info">
+				 * 	I have a info border color
+				 * </div>
+				 */
+.b-info {
+  border: 0.07143rem solid #2199e8;
+}
+
+/**
+				 * @name 	```.b-t-info```
+				 * Specify the border top of 1px solid to **info**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-t-info">
+				 * 	I have a info border top color
+				 * </div>
+				 */
+.b-t-info {
+  border-top: 0.07143rem solid #2199e8;
+}
+
+/**
+				 * @name 	```.b-r-info```
+				 * Specify the border right of 1px solid to **info**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-r-info">
+				 * 	I have a info border right color
+				 * </div>
+				 */
+.b-r-info {
+  border-right: 0.07143rem solid #2199e8;
+}
+
+/**
+				 * @name 	```.b-b-info```
+				 * Specify the border bottom of 1px solid to **info**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-b-info">
+				 * 	I have a info border bottom color
+				 * </div>
+				 */
+.b-b-info {
+  border-bottom: 0.07143rem solid #2199e8;
+}
+
+/**
+				 * @name 	```.b-l-info```
+				 * Specify the border left of 1px solid to **info**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-l-info">
+				 * 	I have a info border left color
+				 * </div>
+				 */
+.b-l-info {
+  border-left: 0.07143rem solid #2199e8;
+}
+
+/**
+				 * @name 	```.b-s-info```
+				 * Specify the border side of 1px solid to **info**
+				 * @styleguide  	Colors / Classes
+				 * @example 	html
+				 * <div class="b-s-info">
+				 * 	I have a info border side color
+				 * </div>
+				 */
+.b-s-info {
+  border-left: 0.07143rem solid #2199e8;
+  border-right: 0.07143rem solid #2199e8;
 }
 
 body {

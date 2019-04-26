@@ -1,5 +1,5 @@
 import { html } from 'lit-html'
-import SHtmlLitComponent from "../../../dist/js/SLitHtmlComponent"
+import SHtmlLitComponent, {fn, json} from "../../../dist/js/SLitHtmlComponent"
 import "./TInputComponent"
 // import "./TFooterComponent"
 import "./TListComponent"
@@ -11,6 +11,7 @@ import { FILTER_ALL, FILTER_ACTIVE, FILTER_DONE } from "./reducer"
 export default class TApp extends SHtmlLitComponent {
   static get defaultState() {
     return {
+      hello: 'Hello'
     }
   }
 
@@ -22,12 +23,14 @@ export default class TApp extends SHtmlLitComponent {
 
   componentMount() {
     super.componentMount()
-
-    console.log(store);
-
     store.subscribe(() => {
       this.render()
     })
+
+    setTimeout(() => {
+      this.state.hello = 'World'
+    }, 3000)
+
   }
 
   onRemove(todo) {
@@ -60,10 +63,10 @@ export default class TApp extends SHtmlLitComponent {
 
     super.render(html`
       <div>
-        <span>${this.props.coolProp}</span>
+        <span>${this.state.hello}</span>
         <section class="todoapp">  
-          <t-input add=${this.onAdd.bind(this)}></t-input>
-          <t-list todos=${todos}></t-list>
+          <t-input add=${fn(this.onAdd.bind(this))}></t-input>
+          <t-list todos=${json(todos)} remove-fn=${fn(this.onRemove.bind(this))}></t-list>
         </section>
         <t-footer />
       </div>

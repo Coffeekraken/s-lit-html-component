@@ -1,7 +1,8 @@
-import SLitHtmlComponent from "../../../dist/js/SLitHtmlComponent"
+import SLitHtmlComponent, { fn, json } from "../../../dist/js/SLitHtmlComponent"
 import "./TListItemComponent"
 import store from "./store"
 import { html } from 'lit-html'
+import { repeat } from 'lit-html/directives/repeat'
 
 export default class TListComponent extends SLitHtmlComponent {
   static get defaultState() {
@@ -47,17 +48,17 @@ export default class TListComponent extends SLitHtmlComponent {
     super.render(html`
       <section class="main">
         <input
-          @onChange=${this.toggleAll}
+          @change=${this.toggleAll}
           id="toggle-all"
           class="toggle-all"
           type="checkbox"
         />
         <label for="toggle-all"></label>
         <ul class="todo-list">
-          ${this.props.todos.map(todo => html`
+          ${repeat(this.props.todos, (todo) => todo.id, (todo, index) => html`
               <t-list-item
-                todo=${todo}
-                removeFn=${this.props.removeFn}
+                todo=${json(todo)}
+                remove-fn=${fn(this.props.removeFn)}
               ></t-list-item>
             `)}
         </ul>

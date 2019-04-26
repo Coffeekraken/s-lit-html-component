@@ -19,13 +19,7 @@ module.exports = {
     html: {
       language: "html",
       data: `
-        <h1 class="h3 m-b-small">
-          Coffeekraken s-{component-name}-component
-        </h1>
-        <p class="p m-b-bigger">
-          {component-description}
-        </p>
-        <!-- examples here... -->
+        <s-sample my-prop-variable="World"></s-sample>
       `
     },
     css: {
@@ -39,13 +33,40 @@ module.exports = {
         body {
           padding: s-space(bigger);
         }
-        // component css here...
       `
     },
     js: {
       language: "js",
       data: `
-        import Component from './dist/index'
+        import { html } from 'lit-html'
+        import SLitHtmlComponent from './dist/index'
+        class SSampleComponent extends SLitHtmlComponent {
+          static get defaultState() {
+            return {
+              myStateVariable: 'Hello'
+            }
+          }
+          static get defaultProps() {
+            return {
+              myPropVariable: ''
+            }
+          }
+          componentMount() {
+            super.componentMount()
+            setTimeout(() => {
+              this.state.myStateVariable = 'Hey!'
+            }, 5000)            
+          }
+          render() {
+            super.render(html\`
+              <div>
+                <h1 class="h1">\${this.state.myStateVariable}</h1>
+                <h2 class="h2">\${this.props.myPropVariable}</h2>
+              </div>
+            \`)
+          }
+        }
+        SSampleComponent.define('s-sample')
       `
     }
   }

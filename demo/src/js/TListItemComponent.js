@@ -45,6 +45,9 @@ export default class TListItemComponent extends SLitHtmlComponent {
   }
 
   render() {
+
+    console.log('todo', this.props.todo)
+
     const classNames = classnames({
       editing: this.state.editing,
       completed: this.props.todo.done
@@ -56,21 +59,21 @@ export default class TListItemComponent extends SLitHtmlComponent {
           <input
             class="toggle"
             type="checkbox"
-            @onChange=${this.onToggle}
-            checked=${this.props.todo.done}
+            @change=${this.onToggle}
+            ?checked=${this.props.todo.done}
           />
-          <label @ondblclick=${this.edit}>
+          <label @dblclick=${this.edit}>
             ${this.props.todo.title}
           </label>
           <button
             class="destroy"
-            @onClick=${() => this.props.removeFn(this.props.todo)}
+            @click=${() => { this.props.removeFn(this.props.todo); }}
           />
         </div>
         <input
           class="edit"
-          @onKeyup=${this.onEditKeyUp}
-          @onBlur=${this.onEditBlur}
+          @keyup=${this.onEditKeyUp}
+          @blur=${this.onEditBlur}
         />
       </li>
     `)
